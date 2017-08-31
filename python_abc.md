@@ -2,7 +2,7 @@
 
 
 ## Why
-Python has become one of the most popular programming languages since its born especially after ML become more and more popular around these years.
+Python has become one of the most popular programming languages since its birth especially after ML become more and more popular around these years.
 Things happen with certain reasons.
 
 * simple
@@ -37,9 +37,9 @@ print("Hello, World!")
 
 Python 3 is not fully back-compatible, so python2 program may not run on python3. 
 
-Fortunately, after several years of progressing Python 3 has become strong and powerful and many third party libs has moved to Python 3 from Python 2. 
+Fortunately, after several years of progressing Python 3 has become strong and powerful and many third party libs have moved to Python 3 from Python 2. 
 
-We recommend new Pythoners choose Python 3 as your programing platform instead of Python 2.There are some significant improvements for Python 3 compared to Python 2, so experienced Python 2 programmers are reasonable to try Python 3.
+I recommend new Pythoners choose Python 3 as your programing platform instead of Python 2.There are some significant improvements for Python 3 compared to Python 2, so experienced Python 2 programmers are reasonable to try Python 3.
 
 ## Language basics
 
@@ -56,7 +56,7 @@ We recommend new Pythoners choose Python 3 as your programing platform instead o
 		print(type(a)) # str
 	```
 
-* flow  control: if elif else, while, for
+* flow control: if elif else, while, for
 * function: def funcname(arg1, arg2, *args, **kwargs)
 
 	```
@@ -255,7 +255,7 @@ We recommend new Pythoners choose Python 3 as your programing platform instead o
 
 * Machine Learning
 	* scikit-learn
-	* gensim // natural linguastic programming
+	* gensim // Natural Linguistic Programming
 	* jieba
 	* nltk
 	* Deep learning: tensor flow
