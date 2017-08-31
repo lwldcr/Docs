@@ -69,10 +69,11 @@ We recommend new Pythoners choose Python 3 as your programing platform instead o
 	```
 
 * class: class MyClass(object):
+
 	* `__init__(self, ...)` :  something like java's constructor, but is unique
 	* old type class VS new type class
 	* magic methods: `__str__`, `__len__`, `__enter__`, `__exit__`, etc
-    * duck typing(generator, iterator, context, etc)
+	* duck typing(generator, iterator, context, etc)
 		
 		> If it walks like a duck and quacks like a duck then it is a duck.
 
