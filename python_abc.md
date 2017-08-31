@@ -1,7 +1,7 @@
-#Python QuickStart
+# Python QuickStart
 
 
-##Why
+## Why
 Python has become one of the most popular programming languages since its born especially after ML become more and more popular around these years.
 Things happen with certain reasons.
 
@@ -11,14 +11,14 @@ Things happen with certain reasons.
 * glue
 * easy deploying
 
-##How
+## How
 Refs
 
 * [liaoxuefeng](http://www.liaoxuefeng.com/)
 * [python doc](https://docs.python.org/2/)
 * [python cookbook](http://baike.baidu.com/link?url=O0rlwd9D_JjgcbyOi6mEYMXXbLXVyOW77KjnQKoiwGSQlrHLwXTt3fEb_PYo6tdfXejcOvIOeJ30YSjAqjy7tVZ1klKd1B5VoaEMtE1rhsq)
 
-##Hello World
+## Hello World
 As usual, we demostrate a "Hello, World" of python as your first python program:
 
 ```python2
@@ -33,15 +33,15 @@ or Python3:
 print("Hello, World!")
 ```
 
-##Python2 or Python3
+## Python2 or Python3
 
-Python 3 is not fully back-compatible, so python 2 program may not run on python 3. 
+Python 3 is not fully back-compatible, so python2 program may not run on python3. 
 
 Fortunately, after several years of progressing Python 3 has become strong and powerful and many third party libs has moved to Python 3 from Python 2. 
 
 We recommend new Pythoners choose Python 3 as your programing platform instead of Python 2.There are some significant improvements for Python 3 compared to Python 2, so experienced Python 2 programmers are reasonable to try Python 3.
 
-##Language basics
+## Language basics
 
 * variables: no need to state
 
@@ -195,7 +195,7 @@ We recommend new Pythoners choose Python 3 as your programing platform instead o
 		[1, 3, 5]
 		```
 
-##Traps and Pitfalls
+## Traps and Pitfalls
 * Performance related
 	* threading
 
@@ -230,7 +230,7 @@ We recommend new Pythoners choose Python 3 as your programing platform instead o
 	A simple but smart way to handle encoding problems is when store text into files, encode them into UTF-8 codec; when loading text into variables, decode them into Unicode.
 
 
-##What we use Python do
+## What we use Python do
 * Webpage crawlers
 	* scrapy
 	* build crawler with httplib, urllib, etc
@@ -275,7 +275,7 @@ We recommend new Pythoners choose Python 3 as your programing platform instead o
 	* uWSGI/gunicorn
 	* supervisor
 
-##Dev Tools
+## Dev Tools
 * vim
 	* autocomplete
 	* syntax checking
@@ -286,7 +286,7 @@ We recommend new Pythoners choose Python 3 as your programing platform instead o
 * PyCharm by JetBrains
 * Sublime Text
 
-##Accessory
+## Accessory
 ```python2
 >>> import this
 The Zen of Python, by Tim Peters
