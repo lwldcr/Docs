@@ -9,19 +9,20 @@
 * easy deploying: staticly linked when building executable binaries
 * standard library support: db/net/encoding/test
 * goroutine: write parallel programs in serial thinking
-* "Google" brand 
+* "Google" brand
 
 #### Milestones
 
 * 2007.9 Rob Pike、Ken Thompson、Robert Griesemer started designing go
 * 2009.11 Birth
+* 2012.3 Go 1.0 released
 * 2017.8 Go 1.9 released
 
 #### Installation & Configuration
 
-* Fetch go installer of your platform(unix/linux/windows supported)
+* Fetch go installer of your platform(unix/linux/windows supported) and install
 
-* Define your GOROOT(where go installed) & GOPATH(workspace) environment variables
+* Define your **GOROOT**(where go installed) & **GOPATH**(workspace) environment variables
 
 * Test `go` command, you should get:
 
@@ -83,9 +84,9 @@
 
   * import
 
-    * import anything you need, here "fmt" is a built-in packge, with frequently used text formating functions, like the fmt.Prinln above
+    * import anything you need, here "fmt" is a built-in packge, with frequently used text formating functions, like the `fmt.Prinln` above
 
-    * import more than one packages could be writted as follows:
+    * import more than one packages should be written as a parenthesized list in go convention:
 
       ```Go
       import (
@@ -97,7 +98,7 @@
 
   * func
 
-    * stating of function, followed by a function name, parameters list inside parentheses, returning values (optional)
+    * stating of function, followed by a function name, parameters list inside parenthesis, returning values (optional)
 
       ```Go
       func function1() { // a function with no parameters return nothing
@@ -124,7 +125,7 @@
     fmt.Println(i)
     ```
 
-  * Easy way
+  * Short way
 
     ```go
     i := 10 // state an int type variable i and assign it to 10
@@ -234,6 +235,7 @@
         myPainc()
         fmt.Printf("This will not show")
     }
+
     func myPainc() {
         var x = 30
         var y = 0
@@ -260,7 +262,7 @@
 
   * data structure: a pointer to an array, a length, a capacity
 
-  * as function parameters: go functions always copy data, so pass a full huge array cost much, use slice instead
+  * as function parameters: go functions always copy data, so passing huge arrays costs much, use slices instead
 
   * related reading: [[Go slices are not dynamic arrays](https://appliedgo.net/slices/)](https://appliedgo.net/slices/ ), [译文](http://blog.csdn.net/lwldcr/article/details/77337738)
 
@@ -348,6 +350,7 @@
     temp := *i
     *i = *j
     *j = temp
+    // *i, *j = *j, *i
   }
 
   func main() {
@@ -373,7 +376,7 @@
   	for {
   		rw, e := l.Accept()
   		......
-  		go c.serve(ctx) // for every request, starts a new Goroutine with `go`
+  		go c.serve(ctx) // for every request, server starts a new Goroutine to serve
   	}
   }
   ```
@@ -381,49 +384,56 @@
 * Sync
 
   ```go
-  func produce(ch chan int, wg *sync.WaitGroup) {
+  package main
+
+  import (
+  	"fmt"
+  	"sync"
+  )
+
+  func produce(ch chan int, sig chan int, wg *sync.WaitGroup) {
   	for i := 0; i < 10; i++ {
   		ch <- i
-          fmt.Println("append:", i)
+  		fmt.Println("append:", i)
   	}
   	fmt.Println("appending done")
+  	sig <- 0 // append done signal
   	wg.Done()
   }
 
-  func consume(ch chan int, wg *sync.WaitGroup) {
-      fmt.Println("start consuming..")
-      for {
-          select {
-          case i, ok := <- ch:
-              if !ok {
-                  fmt.Println("error")
+  func consume(ch chan int, sig chan int, wg *sync.WaitGroup) {
+  	fmt.Println("start consuming..")
+  	for {
+  		select {
+  		case i, ok := <- ch:
+  			if !ok {
+  				fmt.Println("error")
   				wg.Done()
-                  return
-              }
-              fmt.Println("got:", i)
-              if i == 9 {
-                  fmt.Println(" consuming done")
-  				wg.Done()
-                  return
-              }
-  		default:
-  			time.Sleep(1*time.Microsecond)
-          }
-      }
-  	wg.Done()
+  				return
+  			}
+  			fmt.Println("got:", i)
+  		case <- sig:
+  			fmt.Println("got stop signal")
+  			wg.Done()
+  			return
+  		}
+  	}
   }
 
   func main() {
-    ch := make(chan int) // make a new channel
-    var wg sync.WaitGroup // state a WaitGroup variable
-    wg.Add(2) // add 2
-    
-    go consume(ch, &wg) // start consuming goroutine
-    go procuce(ch, &wg) // start produce
-    
-    wg.Wait() // wait until all goroutines done
-    close(ch) // close channel
+  	ch := make(chan int) // make a data channel
+  	sig := make(chan int) // make a signal channel
+  	var wg sync.WaitGroup // state a WaitGroup variable
+  	wg.Add(2) // add 2
+
+  	go consume(ch, sig, &wg) // start consuming goroutine
+  	go produce(ch, sig, &wg) // start produce
+
+  	wg.Wait() // wait until all goroutines done
+  	close(ch) // close channels
+  	close(sig)
   }
+
   ```
 
   ​
