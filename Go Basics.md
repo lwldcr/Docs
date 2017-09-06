@@ -392,29 +392,28 @@
   )
 
   func produce(ch chan int, sig chan int, wg *sync.WaitGroup) {
+    	defer wg.Done()
   	for i := 0; i < 10; i++ {
   		ch <- i
   		fmt.Println("append:", i)
   	}
   	fmt.Println("appending done")
   	sig <- 0 // append done signal
-  	wg.Done()
   }
 
   func consume(ch chan int, sig chan int, wg *sync.WaitGroup) {
   	fmt.Println("start consuming..")
+    	defer wg.Done()
   	for {
   		select {
   		case i, ok := <- ch:
   			if !ok {
   				fmt.Println("error")
-  				wg.Done()
   				return
   			}
   			fmt.Println("got:", i)
   		case <- sig:
   			fmt.Println("got stop signal")
-  			wg.Done()
   			return
   		}
   	}
